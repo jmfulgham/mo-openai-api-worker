@@ -25,7 +25,7 @@ export default {
 			return new Response(JSON.stringify(chatCompletion.choices[0].message), { headers: corsHeaders });
 		} catch (e) {
 			console.error('OpenAI Error ', e);
-			return new Response(e, { headers: corsHeaders });
+			return new Response(JSON.stringify({error: e.message}), { status: 500, headers: corsHeaders });
 		}
 	}
 };
