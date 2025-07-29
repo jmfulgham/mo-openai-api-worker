@@ -11,6 +11,10 @@ export default {
 			return new Response(null, { headers: corsHeaders });
 		}
 
+		if (request.method !== 'POST'){
+			return new Response(JSON.stringify({ error: `${request.method} method not allowed` }), {status: 405, headers: corsHeaders});
+		}
+
 		const openAi = new OpenAI({
 			apiKey: env.OPENAI_API_KEY,
 			baseURL: 'https://gateway.ai.cloudflare.com/v1/20ff3604bcf584d2dad44019542817a7/pollyglot/openai'
